@@ -1,6 +1,16 @@
 <component name="libraryTable">
   <library name="Flutter Plugins" type="FlutterPluginsLibraryType">
-    <CLASSES />
+    <CLASSES>
+      <root url="file://C:/flutter/flutter_windows_1.17.5-stable/.pub-cache/hosted/pub.dartlang.org/barcode_scan-1.0.0" />
+      <root url="file://C:/flutter/flutter_windows_1.17.5-stable/.pub-cache/hosted/pub.dartlang.org/path_provider_linux-0.0.1+2" />
+      <root url="file://C:/flutter/flutter_windows_1.17.5-stable/.pub-cache/hosted/pub.dartlang.org/url_launcher_macos-0.0.1+7" />
+      <root url="file://C:/flutter/flutter_windows_1.17.5-stable/.pub-cache/hosted/pub.dartlang.org/url_launcher_web-0.1.2" />
+      <root url="file://C:/flutter/flutter_windows_1.17.5-stable/.pub-cache/hosted/pub.dartlang.org/shared_preferences_web-0.1.2+7" />
+      <root url="file://C:/flutter/flutter_windows_1.17.5-stable/.pub-cache/hosted/pub.dartlang.org/url_launcher_linux-0.0.1+1" />
+      <root url="file://C:/flutter/flutter_windows_1.17.5-stable/.pub-cache/hosted/pub.dartlang.org/url_launcher-5.5.0" />
+      <root url="file://C:/flutter/flutter_windows_1.17.5-stable/.pub-cache/hosted/pub.dartlang.org/shared_preferences_linux-0.0.2+1" />
+      <root url="file://C:/flutter/flutter_windows_1.17.5-stable/.pub-cache/hosted/pub.dartlang.org/shared_preferences-0.5.8" />
+    </CLASSES>
     <JAVADOC />
     <SOURCES />
   </library>
