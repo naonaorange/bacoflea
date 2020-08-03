@@ -13,8 +13,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  String barcode;
-  String productName;
+  String _productName;
   int _selectedIndex = 0;
   List<String> _productsHist = [];
 
@@ -67,6 +66,16 @@ class _HomePageState extends State<HomePage> {
         Text('バーコード読み込み履歴'),
         Padding(
           padding: EdgeInsets.all(10.0),
+        ),
+        RaisedButton.icon(
+          icon: Icon(Icons.delete),
+          label: Text('履歴消去'),
+          onPressed: (){
+            setState(() {
+              this._productsHist = [];
+            });
+            saveProductsHist();
+          },
         ),
         Flexible(
         child: ListView.builder(
@@ -139,20 +148,20 @@ class _HomePageState extends State<HomePage> {
   }
 
   Future searchProductName() async {
-    this.productName = '';
+    this._productName = '';
     BarcodeScanning scanning = new BarcodeScanning();
     ProductSearcher searcher = new ProductSearcher();
     try{
       await scanning.scan();
       if(scanning.scanStatus() == scanning.SCAN_OK){
         await searcher.search(scanning.barcode);
-        setState(() => this.productName = searcher.productName);
-        await Clipboard.setData(ClipboardData(text: this.productName));
+        setState(() => this._productName = searcher.productName);
+        await Clipboard.setData(ClipboardData(text: this._productName));
         setState(() {
-          this._productsHist.insert(0, this.productName);
+          this._productsHist.insert(0, this._productName);
         });
         saveProductsHist();
-        _showDialog('コピーしました', this.productName);
+        _showDialog('コピーしました', this._productName);
       }
       else if(scanning.scanStatus() == scanning.CAMERA_ACCESS_DENIED){
         _showDialog('スキャンに失敗しました', 'カメラのアクセスを許可してください');
@@ -197,11 +206,9 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-
   void launchUrl(String url) async {
     if (await canLaunch(url)) {
       await launch(url);
-    } else {
     }
   }
 
