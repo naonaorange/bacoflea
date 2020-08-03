@@ -153,7 +153,7 @@ class _HomePageState extends State<HomePage> {
     ProductSearcher searcher = new ProductSearcher();
     try{
       await scanning.scan();
-      if(scanning.scanStatus() == scanning.SCAN_OK){
+      if(scanning.scanStatus == scanning.SCAN_OK){
         await searcher.search(scanning.barcode);
         setState(() => this._productName = searcher.productName);
         await Clipboard.setData(ClipboardData(text: this._productName));
@@ -251,6 +251,9 @@ class BarcodeScanning{
       if((this._barcode[0] != '9') || (this.barcode[1] != '7')){
         this._scanStatus = UNMATCH_FORMAT;
       }
+      else{
+        this._scanStatus = SCAN_OK;
+      }
     } on PlatformException catch (e) {
       if (e.code == BarcodeScanner.CameraAccessDenied) {
         this._scanStatus = this.CAMERA_ACCESS_DENIED;
@@ -266,7 +269,7 @@ class ProductSearcher{
   get productName => _productName;
 
   ProductSearcher(){
-    this._clientId = '';
+    //this._clientId = 'CLIENT_ID';
   }
 
   Future search(String janCode) async {
