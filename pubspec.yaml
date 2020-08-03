@@ -26,6 +26,7 @@ dependencies:
   barcode_scan: ^1.0.0
   url_launcher: ^5.5.0
   shared_preferences: ^0.5.8
+  flutter_launcher_icons: ^0.7.5
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -78,3 +79,8 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "icon/icon.png"
