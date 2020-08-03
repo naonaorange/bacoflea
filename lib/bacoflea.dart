@@ -269,7 +269,7 @@ class ProductSearcher{
   get productName => _productName;
 
   ProductSearcher(){
-    //this._clientId = 'CLIENT_ID';
+    this._clientId = 'CLIENT_ID';
   }
 
   Future search(String janCode) async {
