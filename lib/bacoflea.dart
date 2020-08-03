@@ -159,6 +159,9 @@ class _HomePageState extends State<HomePage> {
         await Clipboard.setData(ClipboardData(text: this._productName));
         setState(() {
           this._productsHist.insert(0, this._productName);
+          if(10 < this._productsHist.length){
+            this._productsHist.removeLast();
+          }
         });
         saveProductsHist();
         _showDialog('コピーしました', this._productName);
