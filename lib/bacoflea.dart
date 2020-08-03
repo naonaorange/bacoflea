@@ -27,7 +27,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('BACOFLEA'),
+        title: Text('バコフリー'),
       ),
       body: (_selectedIndex == 0) ? searchBody() : launchBody(),
       bottomNavigationBar: BottomNavigationBar(
@@ -248,12 +248,7 @@ class BarcodeScanning{
     this._scanStatus = this.UNKNOWN_ERROR;
     try {
       this._barcode = await BarcodeScanner.scan();
-      if((this._barcode[0] != '9') || (this.barcode[1] != '7')){
-        this._scanStatus = UNMATCH_FORMAT;
-      }
-      else{
-        this._scanStatus = SCAN_OK;
-      }
+      this._scanStatus = SCAN_OK;
     } on PlatformException catch (e) {
       if (e.code == BarcodeScanner.CameraAccessDenied) {
         this._scanStatus = this.CAMERA_ACCESS_DENIED;
