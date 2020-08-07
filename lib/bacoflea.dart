@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:http/http.dart' as http;
 
 class HomePage extends StatefulWidget {
   @override
@@ -16,6 +17,8 @@ class _HomePageState extends State<HomePage> {
   String _productName;
   int _selectedIndex = 0;
   List<String> _productsHist = [];
+  String _debugMsg0 = "";
+  String _debugMsg1 = "";
 
   @override
   void initState() {
@@ -155,7 +158,13 @@ class _HomePageState extends State<HomePage> {
       await scanning.scan();
       if(scanning.scanStatus == scanning.SCAN_OK){
         await searcher.search(scanning.barcode);
-        setState(() => this._productName = searcher.productName);
+        //setState(() => this._productName = searcher.productName);
+        setState(() {
+          this._productName = searcher.productName;
+          this._debugMsg0 = searcher._debugMsg0;
+          this._debugMsg1 = searcher._debugMsg1;
+
+        });
         await Clipboard.setData(ClipboardData(text: this._productName));
         setState(() {
           this._productsHist.insert(0, this._productName);
@@ -261,7 +270,11 @@ class BarcodeScanning{
 class ProductSearcher{
   String _clientId;
   String _productName;
+  String _debugMsg0 = "";
+  String _debugMsg1 = "";
   get productName => _productName;
+  get debugMsg0 => _debugMsg0;
+  get debugMsg1 => _debugMsg1;
 
   ProductSearcher(){
     this._clientId = 'CLIENT_ID';
@@ -273,11 +286,12 @@ class ProductSearcher{
       String url = 'https://shopping.yahooapis.jp/ShoppingWebService/V3/itemSearch';
       url += '?appid=' + this._clientId + '&jan_code=' + janCode + '&results=1';
 
-      var req = await HttpClient().getUrl(Uri.parse(url));
-      var res = await req.close();
-      String resText = await utf8.decodeStream(res);
-      var resJson = jsonDecode(resText);
+      var res = await http.get(url);
+      //print("Response status: ${res.statusCode}");
+      //print("Response body: ${res.body}");
+      var resJson = jsonDecode(res.body);
       this._productName = resJson['hits'][0]['name'];
+
     } catch (e) {
     }
   }
